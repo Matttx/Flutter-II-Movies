@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movies/blocs/covid/covid_bloc.dart';
+import 'package:movies/models/covid_model.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -24,14 +26,35 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final covidBloc = CovidBloc();
+
+  @override
+  void initState() {
+    covidBloc.covidEventSink.add(CovidAction.Fetch);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          child: const Text("Main"),
-        ),
-      ),
+      body: StreamBuilder<CovidModel>(
+        stream: covidBloc.covid,
+        builder: (context, snapshot) {
+          final data = snapshot.data;
+          if (snapshot.hasData) {
+            return Center(
+                child: Text(data!.global.newConfirmed.toString())
+            );
+          }
+          if (snapshot.hasError) {
+            return Center(
+              child: Text(snapshot.error.toString())
+            );
+          } else {
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
+      )
     );
   }
 }
