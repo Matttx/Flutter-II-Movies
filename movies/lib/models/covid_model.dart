@@ -1,6 +1,6 @@
 class CovidModel {
   Global global;
-  List<Countries> countries;
+  List<CountryModel> countries;
   String date;
 
   CovidModel(
@@ -8,10 +8,10 @@ class CovidModel {
 
   factory CovidModel.fromJson(Map<String, dynamic> json) {
     final global = Global.fromJson(json['Global']);
-    final countries = <Countries>[];
+    final countries = <CountryModel>[];
     if (json['Countries'] != null) {
       json['Countries'].forEach((v) {
-        countries.add(Countries.fromJson(v));
+        countries.add(CountryModel.fromJson(v));
       });
     }
     final date = json['Date'];
@@ -66,9 +66,9 @@ class Global {
   }
 }
 
-class Countries {
-  final String country;
-  final String countryCode;
+class CountryModel {
+  final String name;
+  final String code;
   final String slug;
   final int newConfirmed;
   final int totalConfirmed;
@@ -78,9 +78,9 @@ class Countries {
   final int totalRecovered;
   final String date;
 
-  Countries(
-      {required this.country,
-      required this.countryCode,
+  CountryModel(
+      {required this.name,
+      required this.code,
       required this.slug,
       required this.newConfirmed,
       required this.totalConfirmed,
@@ -90,10 +90,10 @@ class Countries {
       required this.totalRecovered,
       required this.date});
 
-  factory Countries.fromJson(Map<String, dynamic> json) {
-    return Countries(
-        country: json['Country'],
-        countryCode: json['CountryCode'],
+  factory CountryModel.fromJson(Map<String, dynamic> json) {
+    return CountryModel(
+        name: json['Country'],
+        code: json['CountryCode'],
         slug: json['Slug'],
         newConfirmed: json['NewConfirmed'],
         totalConfirmed: json['TotalConfirmed'],
@@ -106,8 +106,8 @@ class Countries {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['Country'] = country;
-    data['CountryCode'] = countryCode;
+    data['Country'] = name;
+    data['CountryCode'] = code;
     data['Slug'] = slug;
     data['NewConfirmed'] = newConfirmed;
     data['TotalConfirmed'] = totalConfirmed;
