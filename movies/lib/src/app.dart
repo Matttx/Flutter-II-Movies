@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies/blocs/covid/covid_bloc.dart';
 import 'package:movies/models/covid_model.dart';
+import 'package:movies/src/pages/main_informations.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -37,23 +38,22 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder<CovidModel>(
-        stream: covidBloc.covid,
-        builder: (context, snapshot) {
-          final data = snapshot.data;
-          if (snapshot.hasData) {
-            return Center(
-                child: Text(data!.global.newConfirmed.toString())
-            );
-          }
-          if (snapshot.hasError) {
-            return Center(
-              child: Text(snapshot.error.toString())
-            );
-          } else {
-            return const Center(child: CircularProgressIndicator());
-          }
-        },
+      body: SafeArea(
+        child: StreamBuilder<CovidModel>(
+          stream: covidBloc.covid,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return MainPage(data: snapshot.data!);
+            }
+            if (snapshot.hasError) {
+              return Center(
+                child: Text(snapshot.error.toString())
+              );
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
+          },
+        ),
       )
     );
   }
