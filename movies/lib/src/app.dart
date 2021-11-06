@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Movies',
       theme: AppTheme.defaultTheme,
       home: const HomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
