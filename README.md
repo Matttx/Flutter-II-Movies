@@ -16,6 +16,10 @@ PORT: 8080
   - [GET] /me
   - [PUT] /user/update
   - [DELETE] /user/delete
+  
+- Countries : 
+    - [GET] /country
+    - [GET] /countries
 
 ### User's route
 
@@ -37,3 +41,13 @@ PORT: 8080
   - Body example : ```{}```
   - Query param : jwt (example: ```http://localhost:8080/user/delete?jwt=ad0dea00-7b40-4fcc-98ea-8afe6428f265```)
   - Return : []
+  
+### Countries's routes
+- country :
+  - Body example : ```{}```
+  - Return : complete information about one country
+- countries :
+    - Body example : ```{}```
+    - Query param : countryName (example: ```http://localhost:8080/country?countryName=Afghanistan```)
+    - Return : array containing all countries information
+
