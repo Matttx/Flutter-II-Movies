@@ -9,6 +9,7 @@ const app = express();
 
 const router = require('./routes/router');
 const userRouter = require('./routes/user.routes');
+const countryRouter = require('./routes/country.routes')
 
 app.use(morgan('combined'));
 app.use(cors());
@@ -19,6 +20,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(router);
 app.use(userRouter);
+app.use(countryRouter)
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
