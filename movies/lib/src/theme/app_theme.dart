@@ -10,7 +10,7 @@ class AppTheme {
     final ThemeData base = ThemeData.light();
 
     return base.copyWith(
-      brightness: Brightness.light,
+      brightness: Brightness.dark,
 
       primaryColor: AppColors.primary,
       primaryColorDark: AppColors.primaryDark,
