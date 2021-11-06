@@ -14,10 +14,10 @@ const register = async (req, res) => {
     const result = await genericController
       .createDocument('user', body, body.jwt);
 
-    res.status(result.code).send({message: result.message});
+    res.status(result.code).send({message: result.message, result: []});
     return;
   }
-  res.status(400).send({message: "Email address already used"});
+  res.status(400).send({message: "Email address already used", result: []});
 }
 
 const login = async (req, res) => {
@@ -30,7 +30,7 @@ const login = async (req, res) => {
     res.status(200).send({message: 'Successfully Login', result: result.result[0].jwt});
     return;
   }
-  res.status(400).send({message: 'Login failed'});
+  res.status(400).send({message: 'Login failed', result: []});
 }
 
 const getMe =async  (req, res) => {
@@ -46,9 +46,9 @@ const updateUser = async (req, res) => {
   console.log(`PUT '/user/update' 🤠 ${Date()}`);
 
   const result = genericController
-    .updateField('user', req.body.jwt, req.body.fields);
+    .updateField('user', req.query.jwt, req.body.fields);
 
-  res.status(result.code).send({message: result.message});
+  res.status(result.code).send({message: result.message, result: []});
 }
 
 const deleteUser = async (req, res) => {
@@ -57,7 +57,7 @@ const deleteUser = async (req, res) => {
   const result = await genericController
     .deleteDocument('user', req.query.jwt);
 
-  res.status(result.code).send({message: result.message});
+  res.status(result.code).send({message: result.message, result: []});
 }
 
 module.exports = {
