@@ -1,7 +1,12 @@
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
+const genericController = require('../controllers/helpers/generic.controller');
+const {db} = require("../config/firebase");
 
-const register = (req, res, next) => {
-  res.json("Route register");
+const register = async (req, res, next) => {
+  const result = await genericController
+      .createDocument('user', 'test');
+
+  res.status(result.code).send(result.message);
 }
 
 const login = (req, res, next) => {
