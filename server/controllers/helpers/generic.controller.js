@@ -1,62 +1,64 @@
 //const fetch = require("node-fetch");
 const { db } = require("../../config/firebase.js");
 
-exports.createDocument = function (collectionName, docDatas) {
-  const query = db.collection(collectionName).doc();
+exports.createDocument = function (collectionName, docDatas, id) {
+  const query = db.collection(collectionName).doc(id);
 
   return query.set(docDatas)
-    .then((r) => ({code: 200, message: r}))
+    .then(() => ({code: 200, message: 'Account successfully register'}))
     .catch((err) => ({code: 400, message: err}));
 }
-/*
 
-exports.createDocumentCall = function (req, res) {
-  createDocument(req.params.name, req.params.id, req.params.data)
-    .then((r) => res.status(200).send(r))
-    .catch((err) => res.status(404).send(err));
-};
+// -- Function to get all documents from a collection with a condition
+exports.getSpecificDocuments = async function (collectionName, fieldName, operator, value) {
+  const docRef = db.collection(collectionName);
+  const docSnapshot = await docRef.where(fieldName, operator, value).get();
+  const docList = [];
 
+  if (docSnapshot.empty) {
+    return ({code: 400, result: [], message: 'Document not found'});
+  }
+  docSnapshot.forEach((doc) => {
+    docList.push(doc.data());
+  });
+  return ({code: 200, result: docList, message: 'Document/s successfully found/s'});
+}
 
 // -- Function to get all documents from a collection
-async function getAllDocuments(collectionName) {
+exports.getAllDocuments = async function (collectionName) {
   const docRef = db.collection(collectionName);
   const docSnapshot = await docRef.get();
   const docList = [];
 
   if (docSnapshot.empty) {
-    return [];
+    return ({code: 400, result: [], message: 'Document not found'});
   }
   docSnapshot.forEach((doc) => {
     docList.push(doc.data());
   });
-  return docList;
+  return ({code: 200, result: docList, message: 'Document/s successfully found/s'});
 }
 
-exports.getAllDocumentsCall = async function (req, res) {
-  getAllDocuments(req.params.name)
-    .then((result) => {
-      res.status(200).send(result);
-    })
-    .catch((err) => {
-      res.send(err);
-    });
-};
-
 // -- Function to update a field in a doc or create new one if it doesn't exist
-function updateField(collectionName, docID, field) {
+exports.updateField = function(collectionName, docID, field) {
   db.collection(collectionName)
     .doc(docID)
     .update(field)
     .catch((error) => {
       console.log("Error in desk update:", error);
-      return 404;
+      return ({code: 400, result: [], message: 'Update failed'});
     });
-  return 200;
+  return ({code: 200, result: [], message: 'Document successfully updated'});
 }
 
-exports.updateFieldCall = function (req, res) {
-  updateField(req.params.name)
-    .then((r) => res.status(200).send(r))
-    .catch((err) => res.status(404).send(err));
-};
-*/
+// -- Function to delete a doc
+exports.deleteDocument = async function(collectionName, docId) {
+  db.collection(collectionName)
+    .doc(docId)
+    .delete()
+    .catch((err) => {
+      return ({code: 400, result: [], message: 'Delete failed'});
+    })
+  return ({code: 200, result: [], message: 'Document successfully deleted'});
+}
+
