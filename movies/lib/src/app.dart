@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:movies/src/pages/profile_page.dart';
 import 'package:movies/src/theme/app_colors.dart';
 import 'package:movies/src/theme/app_theme.dart';
 
@@ -9,9 +10,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: AppColors.background,
-      statusBarBrightness: Brightness.dark
-    ));
+        statusBarColor: AppColors.background,
+        statusBarBrightness: Brightness.dark));
     return MaterialApp(
       title: 'Movies',
       theme: AppTheme.defaultTheme,
@@ -33,17 +33,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
-      child: Scaffold(
-        body: Center(
-          child: ElevatedButton(
-            onPressed: null,
-            child: const Text("Hello"),
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(
-                    Theme.of(context).primaryColor)),
-          ),
-        ),
-      ),
+      child: Scaffold(body: ProfilePage()),
     );
   }
 }
