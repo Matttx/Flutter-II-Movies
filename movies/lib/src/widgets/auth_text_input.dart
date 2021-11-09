@@ -9,7 +9,8 @@ class AuthTextInput extends StatefulWidget {
       this.prefixIconSize = 20,
       required this.hintText,
       required this.isSecured,
-      required this.textController})
+      required this.textController,
+      required this.error})
       : super(key: key);
 
   final IconData? prefixIcon;
@@ -18,6 +19,7 @@ class AuthTextInput extends StatefulWidget {
   final String hintText;
   final bool isSecured;
   final TextEditingController textController;
+  final bool error;
 
   @override
   _AuthTextInputState createState() => _AuthTextInputState();
@@ -28,6 +30,7 @@ class _AuthTextInputState extends State<AuthTextInput> {
 
   @override
   void initState() {
+    super.initState();
     _passwordVisible = false;
   }
 
@@ -38,7 +41,9 @@ class _AuthTextInputState extends State<AuthTextInput> {
       child: Container(
         height: 50,
         decoration: BoxDecoration(
-            color: AppColors.white, borderRadius: BorderRadius.circular(10)),
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(10),
+            border: widget.error ? Border.all(color: AppColors.red) : null),
         child: TextField(
           cursorColor: AppColors.black,
           controller: widget.textController,
@@ -54,8 +59,8 @@ class _AuthTextInputState extends State<AuthTextInput> {
                     )
                   : null,
               border: InputBorder.none,
-              suffixIcon: widget.isSecured ?
-                  IconButton(
+              suffixIcon: widget.isSecured
+                  ? IconButton(
                       onPressed: () {
                         setState(() {
                           _passwordVisible = !_passwordVisible;
@@ -63,10 +68,11 @@ class _AuthTextInputState extends State<AuthTextInput> {
                       },
                       splashColor: AppColors.transparent,
                       icon: Icon(
-                        _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                        _passwordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
                         color: AppColors.grey,
-                      )
-                  )
+                      ))
                   : null,
               hintText: widget.hintText,
               hintStyle: const TextStyle(
