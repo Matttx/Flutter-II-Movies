@@ -21,7 +21,7 @@ class MainPage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildTitle(),
+        _buildTitle(context),
         SectionHeader(children: [
           const Text(
             "GLOBAL INFORMATIONS",
@@ -40,9 +40,9 @@ class MainPage extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () => navigateToCountriesList(context),
-            child: const Text(
+            child: Text(
               "More",
-              style: TextStyle(color: Colors.purple),
+              style: TextStyle(color: Theme.of(context).primaryColor),
             ),
           ),
         ]),
@@ -51,14 +51,14 @@ class MainPage extends StatelessWidget {
     );
   }
 
-  Widget _buildTitle() => Padding(
+  Widget _buildTitle(context) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
         child: RichText(
-          text: const TextSpan(
-              style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+          text: TextSpan(
+              style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
               children: [
-                TextSpan(text: "Covid", style: TextStyle(color: Colors.purple)),
-                TextSpan(
+                TextSpan(text: "Covid", style: TextStyle(color: Theme.of(context).primaryColor)),
+                const TextSpan(
                     text: " Tracker", style: TextStyle(color: Colors.black))
               ]),
         ),
@@ -74,6 +74,7 @@ class MainPage extends StatelessWidget {
             FloatingCard(
               value: data.global.newConfirmed,
               description: 'New confirmed',
+              important: true,
             ),
             FloatingCard(
               value: data.global.newDeaths,
@@ -82,6 +83,7 @@ class MainPage extends StatelessWidget {
             FloatingCard(
               value: data.global.totalConfirmed,
               description: 'Total confirmed',
+              important: true,
             ),
             FloatingCard(
               value: data.global.totalDeaths,
@@ -98,7 +100,7 @@ class MainPage extends StatelessWidget {
       child: ListView.builder(
           physics: const NeverScrollableScrollPhysics(),
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          itemCount: 4,
+          itemCount: 3,
           itemBuilder: (context, index) {
             return ListItem(country: sortedCountries[index]);
           }),

@@ -57,7 +57,7 @@ class _CountriesListState extends State<CountriesList> {
                 height: 40,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.black),
+                  border: Border.all(color: Theme.of(context).primaryColor),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(right: 20.0),
@@ -65,15 +65,15 @@ class _CountriesListState extends State<CountriesList> {
                     onChanged: (String value) {
                       filterCountries(value);
                     },
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: "Search a country",
                       prefixIcon: Icon(
                         Icons.search,
-                        color: Colors.purple,
+                        color: Theme.of(context).primaryColor,
                       ),
                     ),
-                    cursorColor: Colors.purple,
+                    cursorColor: Theme.of(context).primaryColor,
                   ),
                 ),
               ),

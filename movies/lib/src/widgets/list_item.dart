@@ -53,11 +53,11 @@ class ListItem extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildValue(value: country.newConfirmed, description: "N-C"),
+                  _buildValue(context, value: country.newConfirmed, description: "N-C", important: true),
                   _buildValue(
-                      value: country.totalConfirmed, description: "T-C"),
-                  _buildValue(value: country.newDeaths, description: "N-D"),
-                  _buildValue(value: country.totalDeaths, description: "T-D"),
+                      context, value: country.totalConfirmed, description: "T-C", important: true),
+                  _buildValue(context, value: country.newDeaths, description: "N-D"),
+                  _buildValue(context, value: country.totalDeaths, description: "T-D"),
                 ],
               )
             ],
@@ -124,6 +124,7 @@ class ListItem extends StatelessWidget {
         FloatingCard(
           value: country.newConfirmed,
           description: 'New confirmed',
+          important: true,
         ),
         FloatingCard(
           value: country.newDeaths,
@@ -132,6 +133,7 @@ class ListItem extends StatelessWidget {
         FloatingCard(
           value: country.totalConfirmed,
           description: 'Total confirmed',
+          important: true,
         ),
         FloatingCard(
           value: country.totalDeaths,
@@ -161,17 +163,17 @@ class ListItem extends StatelessWidget {
         ],
       ));
 
-  Widget _buildValue({value, description}) => Column(
+  Widget _buildValue(context, {value, description, important = false}) => Column(
         children: [
-          Text(description, style: const TextStyle(fontSize: 16)),
           Text(
             value.toString(),
-            style: const TextStyle(
+            style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: Colors.purple),
+                color: important ? Theme.of(context).errorColor : Colors.black),
             overflow: TextOverflow.ellipsis,
           ),
+          Text(description, style: const TextStyle(fontSize: 16)),
         ],
       );
 }

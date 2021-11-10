@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class FloatingCard extends StatelessWidget {
   final int value;
   final String description;
+  final bool important;
 
-  const FloatingCard({Key? key, required this.value, required this.description}) : super(key: key);
+  const FloatingCard({Key? key, required this.value, required this.description, this.important = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class FloatingCard extends StatelessWidget {
             children: [
               Text(
                 value.toString(),
-                style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.purple),
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: important ? Theme.of(context).errorColor : Colors.black),
               ),
               Text(
                 description
