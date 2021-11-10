@@ -2,17 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:movies/blocs/covid/covid_bloc.dart';
 import 'package:movies/models/covid_model.dart';
 import 'package:movies/src/pages/main_informations.dart';
+import 'package:flutter/services.dart';
+import 'package:movies/src/theme/app_colors.dart';
+import 'package:movies/src/theme/app_theme.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: AppColors.background,
+      statusBarBrightness: Brightness.dark
+    ));
     return MaterialApp(
       title: 'Movies',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: AppTheme.defaultTheme,
       home: const HomePage(),
       debugShowCheckedModeBanner: false,
     );
@@ -54,7 +59,7 @@ class _HomePageState extends State<HomePage> {
             }
           },
         ),
-      )
+      ),
     );
   }
 }
