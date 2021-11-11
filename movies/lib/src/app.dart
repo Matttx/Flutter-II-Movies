@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:movies/src/pages/home_screen.dart';
+import 'package:movies/src/pages/login_screen.dart';
 import 'package:movies/src/theme/app_colors.dart';
 import 'package:movies/src/theme/app_theme.dart';
 
@@ -32,9 +32,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return const AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.dark,
-      child: HomeScreen()
-    );
+    return const LoginScreen();
   }
 }
