@@ -91,7 +91,7 @@ class _ProfilePage extends State<ProfilePage> {
               Column(
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(top: 140),
+                    margin: const EdgeInsets.only(top: 120),
                     child: Column(
                       children: [
                         const Align(
