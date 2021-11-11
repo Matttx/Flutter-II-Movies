@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -44,6 +46,8 @@ class SpecialCard extends StatelessWidget {
     this.fontColor = Colors.white,
     this.imagePosition = ImagePos.right,
     this.onTap,
+    this.padding = const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+    this.radius = 5.0,
   }) : super(key: key);
 
   final String title;
@@ -53,6 +57,8 @@ class SpecialCard extends StatelessWidget {
   final Color? fontColor;
   final ImagePos? imagePosition;
   final VoidCallback? onTap;
+  final EdgeInsets? padding;
+  final double? radius;
 
   bool isImageLeft() {
     if (imagePosition == ImagePos.left
@@ -69,9 +75,10 @@ class SpecialCard extends StatelessWidget {
     return Center(
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+        padding: padding,
         decoration: BoxDecoration(
           color: backgroundColor,
-          borderRadius: BorderRadius.circular(5)
+          borderRadius: BorderRadius.circular(radius!)
         ),
         child: IntrinsicHeight(
           child: Row(
@@ -96,20 +103,17 @@ class SpecialCard extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
-                      child: Text(
-                        title,
-                        style: TextStyle(
-                          color: fontColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        )
-                      ),
+                    Text(
+                      title,
+                      style: TextStyle(
+                        color: fontColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      )
                     ),
                     Flexible(
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 10, bottom: 20, left: 10, right: 10),
+                        padding: const EdgeInsets.only(top: 10),
                         child: Text(
                           subtitle,
                           overflow: TextOverflow.fade,
