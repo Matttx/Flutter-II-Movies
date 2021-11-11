@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+<<<<<<< HEAD
 import 'package:movies/src/pages/profile_page.dart';
+=======
+import 'package:movies/src/pages/home_screen.dart';
+>>>>>>> develop
 import 'package:movies/src/theme/app_colors.dart';
 import 'package:movies/src/theme/app_theme.dart';
 
@@ -31,9 +35,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
+    return const AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
-      child: Scaffold(body: ProfilePage()),
+      child: HomeScreen()
     );
   }
 }
