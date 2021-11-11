@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:movies/src/pages/login_screen.dart';
 import 'package:movies/src/pages/navigation_screen.dart';
 import 'package:movies/src/theme/app_colors.dart';
 import 'package:movies/src/theme/app_theme.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Movies',
       theme: AppTheme.defaultTheme,
-      home: const NavigationScreen(),
+      home: const LoginScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

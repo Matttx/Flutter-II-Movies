@@ -24,12 +24,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool _emailError = false;
   bool _passwordError = false;
+  bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
     _emailError = false;
     _passwordError = false;
+    _isLoading = false;
   }
 
   bool isEmailValid() {
@@ -119,6 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: MainButton(
                         buttonText: "SIGN IN",
                         onPressed: () => onSignInPressed(),
+                        isLoading: _isLoading,
                       ),
                     ),
                     AuthRichText(
