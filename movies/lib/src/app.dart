@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-<<<<<<< HEAD
 import 'package:movies/src/pages/profile_page.dart';
-=======
 import 'package:movies/src/pages/home_screen.dart';
->>>>>>> develop
 import 'package:movies/src/theme/app_colors.dart';
 import 'package:movies/src/theme/app_theme.dart';
 
@@ -37,7 +34,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return const AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
-      child: HomeScreen()
+      child: HomeScreen(),
     );
   }
 }
