@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
+import 'package:movies/src/controllers/authentication_controller.dart';
 import 'package:movies/src/pages/login_screen.dart';
 import 'package:movies/src/widgets/auth_header.dart';
 import 'package:movies/src/widgets/auth_rich_text.dart';
@@ -66,10 +67,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return !validation;
   }
 
-  void onRegisterPressed() {
-    isUsernameValid() ? _shakeKeyUsername.currentState?.shake() : null;
-    isEmailValid() ? _shakeKeyEmail.currentState?.shake() : null;
-    isPasswordValid() ? _shakeKeyPassword.currentState?.shake() : null;
+  void onRegisterPressed(BuildContext context) {
+    bool usernameError = isUsernameValid();
+    bool emailError = isEmailValid();
+    bool passwordError = isPasswordValid();
+
+    usernameError ? _shakeKeyUsername.currentState?.shake() : null;
+    emailError ? _shakeKeyEmail.currentState?.shake() : null;
+    passwordError ? _shakeKeyPassword.currentState?.shake() : null;
+
+    if (!usernameError && !emailError && !passwordError) {
+      print('Yo');
+      register(_usernameTextController.text, _emailTextController.text, _passwordTextController.text).then((response) {
+        print(response.body);
+      }).catchError((e) {
+        _showErrorDialog(context);
+      });
+    }
+  }
+
+  void _showErrorDialog(BuildContext context) {
+    final alert = AlertDialog(
+      title: const Text("Error"),
+      content: const Text("There was an error during register."),
+      actions: [TextButton(child: const Text("OK"), onPressed: () {Navigator.of(context).pop();})],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 
   void onRichTextTap(BuildContext context) {
@@ -149,7 +178,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: MainButton(
                         buttonText: "REGISTER",
-                        onPressed: () => onRegisterPressed(),
+                        onPressed: () => onRegisterPressed(context),
                       ),
                     ),
                     AuthRichText(
