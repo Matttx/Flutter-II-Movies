@@ -14,7 +14,7 @@ const register = async (req, res) => {
     const result = await genericController
       .createDocument('user', body, body.jwt);
 
-    res.status(result.code).send({message: result.message, result: []});
+    res.status(result.code).send({message: result.message, result: result.code === 200 ? body.jwt : null});
     return;
   }
   res.status(400).send({message: "Email address already used", result: []});
