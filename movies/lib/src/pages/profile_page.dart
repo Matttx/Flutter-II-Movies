@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:movies/src/widgets/profile_information.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -20,61 +21,77 @@ class _ProfilePage extends State<ProfilePage> {
           fit: BoxFit.cover,
         ),
       ),
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: Container(
-          margin: const EdgeInsets.only(top: 214),
-          child: Column(
+      child: Column(children: [
+        Container(
+          margin: EdgeInsets.only(top: 50, left: 330), // HERE
+          child: IconButton(
+            onPressed: () {
+              print("Button pen");
+            },
+            icon: const Icon(
+              MdiIcons.pencil,
+              size: 24,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        Container(
+          width: MediaQuery.of(context).size.width,
+          margin: EdgeInsets.only(top: 46),
+          height: 700,
+          child: Stack(
             children: [
-              Stack(
+              Container(
+                margin: const EdgeInsets.only(
+                  top: 40,
+                  left: 10,
+                  right: 10,
+                ), // HERE
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                decoration: const BoxDecoration(
+                  color: Color(0xFFF5F8FF),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(50),
+                    topRight: Radius.circular(50),
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  margin: const EdgeInsets.only(bottom: 0),
+                  child: Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Theme.of(context).primaryColorDark,
+                    ),
+                    child: const Center(
+                      child: Text(
+                        "M",
+                        style: TextStyle(
+                          fontSize: 50,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  margin: const EdgeInsets.only(top: 65, left: 75),
+                  child: Image.asset('assets/images/Flag.png'),
+                ),
+              ),
+              Column(
                 children: [
                   Container(
-                    margin:
-                        const EdgeInsets.only(top: 100, left: 10, right: 10),
-                    height: 530,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(50),
-                        topRight: Radius.circular(50),
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Container(
-                      margin: const EdgeInsets.only(top: 33),
-                      child: Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Theme.of(context).primaryColorDark,
-                        ),
-                        child: const Center(
-                          child: Text(
-                            "M",
-                            style: TextStyle(
-                              fontSize: 50,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Container(
-                      margin: const EdgeInsets.only(top: 105, left: 75),
-                      child: Image.asset('assets/images/Flag.png'),
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(top: 150),
+                    margin: const EdgeInsets.only(top: 140),
                     child: Column(
                       children: [
                         const Align(
@@ -103,18 +120,20 @@ class _ProfilePage extends State<ProfilePage> {
                           margin: const EdgeInsets.only(
                               top: 10, left: 30, right: 30),
                           child: TextFormField(
+                            cursorColor: Theme.of(context).primaryColor,
                             initialValue: value,
                             onChanged: (text) {
                               value = text;
                             },
                             decoration: InputDecoration(
+                              focusedBorder: InputBorder.none,
                               enabledBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(
-                                    color: Color(0xFF9E9E9E), width: 0.0),
-                                borderRadius: BorderRadius.circular(10.0),
+                                    color: Color(0x409E9E9E), width: 0.0),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
                               filled: true,
-                              fillColor: Color(0xFF9E9E9E),
+                              fillColor: Color(0x409E9E9E),
                             ),
                           ),
                         ),
@@ -132,7 +151,7 @@ class _ProfilePage extends State<ProfilePage> {
                           ),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(top: 50),
+                          margin: const EdgeInsets.only(top: 80),
                           child: const Text(
                             "COMING SOON",
                             style: TextStyle(
@@ -144,13 +163,13 @@ class _ProfilePage extends State<ProfilePage> {
                         ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ],
           ),
         ),
-      ),
+      ]),
     );
   }
 }
