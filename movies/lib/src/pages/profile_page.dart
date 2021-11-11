@@ -37,8 +37,8 @@ class _ProfilePage extends State<ProfilePage> {
         ),
         Container(
           width: MediaQuery.of(context).size.width,
-          margin: EdgeInsets.only(top: 46),
-          height: 700,
+          margin: EdgeInsets.only(top: 25),
+          height: 617,
           child: Stack(
             children: [
               Container(
@@ -151,7 +151,7 @@ class _ProfilePage extends State<ProfilePage> {
                           ),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(top: 80),
+                          margin: const EdgeInsets.only(top: 65),
                           child: const Text(
                             "COMING SOON",
                             style: TextStyle(
