@@ -17,6 +17,7 @@ class AppColors {
   static const red = Color(0xFFEB2F06);
   static const redDark = Color(0xFFB71540);
   static const shadow = Color(0xFFCED5E3);
+  static const transparent = Color(0x00000000);
 
   const AppColors._();
 }
