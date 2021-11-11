@@ -10,8 +10,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: AppColors.background,
-      statusBarBrightness: Brightness.dark
+        statusBarColor: AppColors.background,
+        statusBarBrightness: Brightness.dark
     ));
     return MaterialApp(
       title: 'Movies',
@@ -20,3 +20,4 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
     );
   }
+}
