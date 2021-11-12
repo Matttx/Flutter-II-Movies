@@ -15,6 +15,8 @@ import 'package:movies/src/widgets/auth_text_input.dart';
 import 'package:movies/src/widgets/shake_animated_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'navigation_screen.dart';
+
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
@@ -104,6 +106,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
         setState(() {
           _isLoading = false;
         });
+
+        // navigate to the home screen of the app
+        Navigator.push(context, MaterialPageRoute(builder: (context) {
+          return const NavigationScreen();
+        }));
+
       }).catchError((e) {
         setState(() {
           _isLoading = false;
