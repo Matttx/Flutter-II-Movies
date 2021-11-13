@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:movies/src/models/user.dart';
 import 'package:movies/src/widgets/profile_information.dart';
+import 'package:movies/src/controllers/user_controller.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -10,7 +12,33 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePage extends State<ProfilePage> {
-  String value = "thomas.hidalgo@epitech.eu";
+  String value = "";
+  User user = User();
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void initState() {
+    //Todo: Add Real JWT from localstorage
+    getMe('731b1b6a-7900-4215-8e86-ec3203b72ce4').then((userAPI) async {
+      user.email = userAPI.email;
+      user.username = userAPI.username;
+      _controller.text = userAPI.email;
+    });
+    _controller.addListener(() {
+      final String text = _controller.text.toLowerCase();
+      _controller.value = _controller.value.copyWith(
+        text: _controller.text,
+        selection:
+            TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing: TextRange.empty,
+      );
+    });
+  }
+
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,9 +96,11 @@ class _ProfilePage extends State<ProfilePage> {
                       shape: BoxShape.circle,
                       color: Theme.of(context).primaryColorDark,
                     ),
-                    child: const Center(
+                    child: Center(
                       child: Text(
-                        "M",
+                        user.username.isNotEmpty
+                            ? user.username[0].toUpperCase()
+                            : "?",
                         style: TextStyle(
                           fontSize: 50,
                           fontWeight: FontWeight.bold,
@@ -94,11 +124,11 @@ class _ProfilePage extends State<ProfilePage> {
                     margin: const EdgeInsets.only(top: 120),
                     child: Column(
                       children: [
-                        const Align(
+                        Align(
                           alignment: Alignment.bottomCenter,
                           child: Text(
-                            "Mistoufle40",
-                            style: TextStyle(
+                            user.username != null ? user.username : "?",
+                            style: const TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
                             ),
@@ -120,10 +150,13 @@ class _ProfilePage extends State<ProfilePage> {
                           margin: const EdgeInsets.only(
                               top: 10, left: 30, right: 30),
                           child: TextFormField(
+                            autocorrect: false,
                             cursorColor: Theme.of(context).primaryColor,
-                            initialValue: value,
-                            onChanged: (text) {
-                              value = text;
+                            controller: _controller,
+                            onFieldSubmitted: (value) {
+                              //Todo: Add Real JWT from localstorage
+                              updateUser("731b1b6a-7900-4215-8e86-ec3203b72ce4",
+                                  value);
                             },
                             decoration: InputDecoration(
                               focusedBorder: InputBorder.none,
@@ -140,7 +173,11 @@ class _ProfilePage extends State<ProfilePage> {
                         Container(
                           margin: const EdgeInsets.only(top: 15),
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              //Todo: Add Real JWT from localstorage
+                              deleteUser(
+                                  "b134c06e-d554-489a-b77d-30430457e44b");
+                            },
                             style: TextButton.styleFrom(
                               primary: Colors.red,
                             ),
