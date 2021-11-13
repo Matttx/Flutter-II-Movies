@@ -14,7 +14,7 @@ const register = async (req, res) => {
     const result = await genericController
       .createDocument('user', body, body.jwt);
 
-    res.status(result.code).send({message: result.message, result: []});
+    res.status(result.code).send({message: result.message, result: result.code === 200 ? body.jwt : null});
     return;
   }
   res.status(400).send({message: "Email address already used", result: []});
@@ -26,6 +26,9 @@ const login = async (req, res) => {
   const result = await genericController
     .getSpecificDocuments('user', 'email', '==', req.body.email);
 
+  if (result.result.length === 0) {
+      res.status(400).send({message: 'No account exists with this email address', result: []});
+  }
   if (req.body.password === result.result[0].password) {
     res.status(200).send({message: 'Successfully Login', result: result.result[0].jwt});
     return;
