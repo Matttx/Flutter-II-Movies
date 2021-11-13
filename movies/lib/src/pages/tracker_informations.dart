@@ -5,16 +5,31 @@ import 'package:movies/src/widgets/floating_card.dart';
 import 'package:movies/src/widgets/list_item.dart';
 import 'package:movies/src/widgets/section_header.dart';
 
-class MainPage extends StatelessWidget {
+class TrackerPage extends StatefulWidget {
   final CovidModel data;
 
-  const MainPage({Key? key, required this.data}) : super(key: key);
+  const TrackerPage({Key? key, required this.data}) : super(key: key);
+
+  @override
+  State<TrackerPage> createState() => _TrackerPageState();
+}
+
+class _TrackerPageState extends State<TrackerPage> {
+  late CountryModel global;
+  late List<CountryModel> countries;
 
   void navigateToCountriesList(context) => Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => CountriesList(countries: data.countries)),
+            builder: (context) => CountriesList(countries: widget.data.countries)),
       );
+
+  @override
+  void initState() {
+    super.initState();
+    global = widget.data.countries.firstWhere((country) => country.name == "Global");
+    countries = widget.data.countries.where((country) => country.name != "Global").toList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +37,10 @@ class MainPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildTitle(context),
-        SectionHeader(children: [
-          const Text(
+        const SectionHeader(children: [
+          Text(
             "GLOBAL INFORMATIONS",
             style: TextStyle(color: Colors.grey),
-          ),
-          Text(
-            data.date.split("T")[0],
-            style: const TextStyle(color: Colors.grey),
           ),
         ]),
         _buildGlobalInformations(),
@@ -72,21 +83,21 @@ class MainPage extends StatelessWidget {
           runSpacing: 10,
           children: [
             FloatingCard(
-              value: data.global.newConfirmed,
+              value: global.newConfirmed,
               description: 'New confirmed',
               important: true,
             ),
             FloatingCard(
-              value: data.global.newDeaths,
+              value: global.newDeaths,
               description: 'New deaths',
             ),
             FloatingCard(
-              value: data.global.totalConfirmed,
+              value: global.totalConfirmed,
               description: 'Total confirmed',
               important: true,
             ),
             FloatingCard(
-              value: data.global.totalDeaths,
+              value: global.totalDeaths,
               description: 'Total deaths',
             ),
           ],
@@ -94,7 +105,7 @@ class MainPage extends StatelessWidget {
       );
 
   Widget _buildCountriesList() {
-    final sortedCountries = data.countries;
+    final sortedCountries = countries;
     sortedCountries.sort((a, b) => b.newConfirmed.compareTo(a.newConfirmed));
     return Expanded(
       child: ListView.builder(

@@ -51,13 +51,10 @@ class ListItem extends StatelessWidget {
                 maxLines: 1,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _buildValue(context, value: country.newConfirmed, description: "N-C", important: true),
-                  _buildValue(
-                      context, value: country.totalConfirmed, description: "T-C", important: true),
-                  _buildValue(context, value: country.newDeaths, description: "N-D"),
-                  _buildValue(context, value: country.totalDeaths, description: "T-D"),
+                  _buildValue(context, value: country.newConfirmed, description: "New confirmed", important: true),
+                  _buildValue(context, value: country.newDeaths, description: "New deaths"),
                 ],
               )
             ],
@@ -95,7 +92,6 @@ class ListItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text("Code: ${country.code}"),
-                  Text("Slug: ${country.slug}"),
                 ],
               ),
             ),
@@ -105,7 +101,7 @@ class ListItem extends StatelessWidget {
                 style: TextStyle(color: Colors.grey),
               ),
               Text(
-                country.date.split("T")[0],
+                country.date.toString(),
                 style: const TextStyle(color: Colors.grey),
               ),
             ]),

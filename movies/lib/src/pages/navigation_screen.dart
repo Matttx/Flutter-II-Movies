@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:movies/src/pages/tracker_screen.dart';
 import 'package:movies/src/theme/app_colors.dart';
 import 'package:movies/src/widgets/custom_animated_bottom_bar.dart';
 
@@ -35,7 +36,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
       ),
       Container(
         alignment: Alignment.center,
-        child: Text("Tracker",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+        child: TrackerScreen(),
       ),
       Container(
         alignment: Alignment.center,
