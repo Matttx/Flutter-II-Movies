@@ -10,12 +10,12 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
               _buildHeader(),
               _buildSectionHeader("Covid Pass"),
-              SizedBox(
+              const SizedBox(
                 height: 100,
                 child: Text("Widget"),
               ),
@@ -31,15 +31,20 @@ class HomeScreen extends StatelessWidget {
     padding: const EdgeInsets.only(top: 10.0),
     child: Row(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(right: 15.0),
+        const Padding(
+          padding: EdgeInsets.only(right: 15.0),
           child: CircleAvatar(child: Text("U", style: TextStyle(fontWeight: FontWeight.bold),), backgroundColor: AppColors.primary, foregroundColor: Colors.white, radius: 25,),
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Hello, Username", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-            Text(DateFormat('E dd MMM. yyyy').format(DateTime.now()), style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.grey),)
+            const Text("Hello, Username", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+            Text(
+              DateFormat('E dd MMM. yyyy').format(DateTime.now()),
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, color: AppColors.grey
+              ),
+            )
           ],
         )
       ],
