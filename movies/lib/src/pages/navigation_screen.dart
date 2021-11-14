@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:movies/src/pages/profile_page.dart';
 import 'package:movies/src/pages/tracker_screen.dart';
 import 'package:movies/src/theme/app_colors.dart';
 import 'package:movies/src/widgets/custom_animated_bottom_bar.dart';
@@ -21,10 +22,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
-      child: Scaffold(
-          bottomNavigationBar: _buildBottomBar(),
-          body: getBody()
-      ),
+      child: Scaffold(bottomNavigationBar: _buildBottomBar(), body: getBody()),
     );
   }
 
@@ -32,20 +30,23 @@ class _NavigationScreenState extends State<NavigationScreen> {
     List<Widget> pages = [
       Container(
         alignment: Alignment.center,
-        child: Text("Home",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
-      ),
-      Container(
-        alignment: Alignment.center,
         child: TrackerScreen(),
       ),
       Container(
         alignment: Alignment.center,
-        child: Text("Emergency",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+        child: Text(
+          "Tracker",
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        ),
       ),
       Container(
         alignment: Alignment.center,
-        child: Text("Profile",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+        child: Text(
+          "Emergency",
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+        ),
       ),
+      ProfilePage(),
     ];
     return IndexedStack(
       index: _currentIndex,
@@ -54,43 +55,43 @@ class _NavigationScreenState extends State<NavigationScreen> {
   }
 
   Widget _buildBottomBar() => CustomAnimatedBottomBar(
-    containerHeight: 70,
-    selectedIndex: _currentIndex,
-    showElevation: true,
-    itemCornerRadius: 20,
-    curve: Curves.easeIn,
-    onItemSelected: (index) => setState(() => _currentIndex = index),
-    items: <BottomNavyBarItem>[
-      BottomNavyBarItem(
-        icon: const Icon(Icons.home),
-        title: const Text('Home'),
-        activeColor: _accentColor,
-        inactiveColor: _inactiveColor,
-        textAlign: TextAlign.center,
-      ),
-      BottomNavyBarItem(
-        icon: const Icon(Icons.compare_arrows),
-        title: const Text('Tracker'),
-        activeColor: _accentColor,
-        inactiveColor: _inactiveColor,
-        textAlign: TextAlign.center,
-      ),
-      BottomNavyBarItem(
-        icon: const Icon(Icons.call),
-        title: const Text(
-          'Emergency ',
-        ),
-        activeColor: _accentColor,
-        inactiveColor: _inactiveColor,
-        textAlign: TextAlign.center,
-      ),
-      BottomNavyBarItem(
-        icon: const Icon(Icons.person),
-        title: const Text('Profile'),
-        activeColor: _accentColor,
-        inactiveColor: _inactiveColor,
-        textAlign: TextAlign.center,
-      ),
-    ],
-  );
+        containerHeight: 70,
+        selectedIndex: _currentIndex,
+        showElevation: true,
+        itemCornerRadius: 20,
+        curve: Curves.easeIn,
+        onItemSelected: (index) => setState(() => _currentIndex = index),
+        items: <BottomNavyBarItem>[
+          BottomNavyBarItem(
+            icon: const Icon(Icons.home),
+            title: const Text('Home'),
+            activeColor: _accentColor,
+            inactiveColor: _inactiveColor,
+            textAlign: TextAlign.center,
+          ),
+          BottomNavyBarItem(
+            icon: const Icon(Icons.compare_arrows),
+            title: const Text('Tracker'),
+            activeColor: _accentColor,
+            inactiveColor: _inactiveColor,
+            textAlign: TextAlign.center,
+          ),
+          BottomNavyBarItem(
+            icon: const Icon(Icons.call),
+            title: const Text(
+              'Emergency ',
+            ),
+            activeColor: _accentColor,
+            inactiveColor: _inactiveColor,
+            textAlign: TextAlign.center,
+          ),
+          BottomNavyBarItem(
+            icon: const Icon(Icons.person),
+            title: const Text('Profile'),
+            activeColor: _accentColor,
+            inactiveColor: _inactiveColor,
+            textAlign: TextAlign.center,
+          ),
+        ],
+      );
 }
