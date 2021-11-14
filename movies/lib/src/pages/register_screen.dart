@@ -5,7 +5,6 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 import 'package:movies/src/controllers/authentication_controller.dart';
 import 'package:movies/src/pages/login_screen.dart';
-import 'package:movies/src/theme/app_colors.dart';
 import 'package:movies/src/widgets/auth_header.dart';
 import 'package:movies/src/widgets/auth_rich_text.dart';
 import 'package:movies/src/widgets/classic_alert_dialog.dart';
@@ -14,6 +13,7 @@ import 'package:movies/src/widgets/main_button.dart';
 import 'package:movies/src/widgets/auth_text_input.dart';
 import 'package:movies/src/widgets/shake_animated_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 import 'navigation_screen.dart';
 
@@ -95,7 +95,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         _isLoading = true;
       });
 
-      register(_usernameTextController.text, _emailTextController.text,
+      register(http.Client(), _usernameTextController.text, _emailTextController.text,
               _passwordTextController.text)
           .then((token) async {
         SharedPreferences s = await SharedPreferences.getInstance();

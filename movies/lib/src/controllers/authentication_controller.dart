@@ -6,8 +6,8 @@ import 'package:movies/src/models/error.dart';
 import 'package:movies/src/models/token.dart';
 import 'package:movies/config/constants.dart' as Constants;
 
-Future<Token> register(String username, String email, String password) async {
-  var response = await http.post(
+Future<Token> register(http.Client client, String username, String email, String password) async {
+  var response = await client.post(
     Uri.parse('${Constants.API_URL}:8080/register'),
     body: {
       'email': email,
@@ -31,8 +31,8 @@ Future<Token> register(String username, String email, String password) async {
   }
 }
 
-Future<Token> login(String email, String password) async {
-  var response = await http.post(
+Future<Token> login(http.Client client, String email, String password) async {
+  var response = await client.post(
     Uri.parse('${Constants.API_URL}:8080/login'),
     body: {
       'email': email,

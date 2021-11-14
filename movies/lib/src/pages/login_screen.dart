@@ -12,6 +12,7 @@ import 'package:movies/src/widgets/main_button.dart';
 import 'package:movies/src/widgets/auth_text_input.dart';
 import 'package:movies/src/widgets/shake_animated_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -75,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
         _isLoading = true;
       });
 
-      login(_emailTextController.text, _passwordTextController.text)
+      login(http.Client(), _emailTextController.text, _passwordTextController.text)
           .then((token) async {
         SharedPreferences s = await SharedPreferences.getInstance();
 
