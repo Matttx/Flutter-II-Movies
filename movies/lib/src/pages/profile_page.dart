@@ -88,125 +88,9 @@ class _ProfilePage extends State<ProfilePage> {
                           ),
                         ),
                       ),
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: Container(
-                          margin: const EdgeInsets.only(bottom: 0),
-                          child: Container(
-                            width: 100,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Theme.of(context).primaryColorDark,
-                            ),
-                            child: Center(
-                              child: Text(
-                                snapshot.data!.username.isNotEmpty
-                                    ? snapshot.data!.username[0].toUpperCase()
-                                    : "?",
-                                style: const TextStyle(
-                                  fontSize: 50,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: Container(
-                          margin: const EdgeInsets.only(top: 65, left: 75),
-                          child: Image.asset('assets/images/Flag.png'),
-                        ),
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.only(top: 120),
-                            child: Column(
-                              children: [
-                                Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Text(
-                                    snapshot.data!.username,
-                                    style: const TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                const ProfileInformation(),
-                                Container(
-                                  margin: const EdgeInsets.only(
-                                    top: 20,
-                                    right: 220,
-                                  ),
-                                  child: const Text(
-                                    "Email address",
-                                    style: TextStyle(
-                                        color: Color(0xFF9E9E9E), fontSize: 16),
-                                  ),
-                                ),
-                                Container(
-                                  margin: const EdgeInsets.only(
-                                      top: 10, left: 30, right: 30),
-                                  child: TextFormField(
-                                    autocorrect: false,
-                                    cursorColor: Theme.of(context).primaryColor,
-                                    controller: _controller,
-                                    onFieldSubmitted: (value) {
-                                      //Todo: Add Real JWT from localstorage
-                                      updateUser(
-                                          "731b1b6a-7900-4215-8e86-ec3203b72ce4",
-                                          value);
-                                    },
-                                    decoration: InputDecoration(
-                                      focusedBorder: InputBorder.none,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: Color(0x409E9E9E), width: 0.0),
-                                        borderRadius: BorderRadius.circular(5.0),
-                                      ),
-                                      filled: true,
-                                      fillColor: const Color(0x409E9E9E),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  margin: const EdgeInsets.only(top: 15),
-                                  child: TextButton(
-                                    onPressed: () {
-                                      //Todo: Add Real JWT from localstorage
-                                      deleteUser(
-                                          "b134c06e-d554-489a-b77d-30430457e44b");
-                                    },
-                                    style: TextButton.styleFrom(
-                                      primary: Colors.red,
-                                    ),
-                                    child: const Text(
-                                      "Delete my account",
-                                      style: TextStyle(fontSize: 16),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  margin: const EdgeInsets.only(top: 65),
-                                  child: const Text(
-                                    "COMING SOON",
-                                    style: TextStyle(
-                                      fontSize: 24,
-                                      color: Color(0xFFCED5E3),
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                      _UserPicture(snapshot),
+                      _UserFlag(),
+                      _ProfileDetails(snapshot),
                     ],
                   ),
                 ),
@@ -222,4 +106,127 @@ class _ProfilePage extends State<ProfilePage> {
       ),
     );
   }
+
+  Widget _UserPicture(snapshot) => Align(
+        alignment: Alignment.topCenter,
+        child: Container(
+          margin: const EdgeInsets.only(bottom: 0),
+          child: Container(
+            width: 100,
+            height: 100,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Theme.of(context).primaryColorDark,
+            ),
+            child: Center(
+              child: Text(
+                snapshot.data!.username.isNotEmpty
+                    ? snapshot.data!.username[0].toUpperCase()
+                    : "?",
+                style: const TextStyle(
+                  fontSize: 50,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+
+  Widget _UserFlag() => Align(
+        alignment: Alignment.topCenter,
+        child: Container(
+          margin: const EdgeInsets.only(top: 65, left: 75),
+          child: Image.asset('assets/images/Flag.png'),
+        ),
+      );
+
+  Widget _ProfileDetails(snapshot) => Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(top: 120),
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                    snapshot.data!.username,
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const ProfileInformation(),
+                Container(
+                  margin: const EdgeInsets.only(
+                    top: 20,
+                    right: 220,
+                  ),
+                  child: const Text(
+                    "Email address",
+                    style: TextStyle(color: Color(0xFF9E9E9E), fontSize: 16),
+                  ),
+                ),
+                _EmailInput(),
+                _Delete(),
+                _ComingSoon()
+              ],
+            ),
+          ),
+        ],
+      );
+
+  Widget _EmailInput() => Container(
+        margin: const EdgeInsets.only(top: 10, left: 30, right: 30),
+        child: TextFormField(
+          autocorrect: false,
+          cursorColor: Theme.of(context).primaryColor,
+          controller: _controller,
+          onFieldSubmitted: (value) {
+            //Todo: Add Real JWT from localstorage
+            updateUser("731b1b6a-7900-4215-8e86-ec3203b72ce4", value);
+          },
+          decoration: InputDecoration(
+            focusedBorder: InputBorder.none,
+            enabledBorder: OutlineInputBorder(
+              borderSide:
+                  const BorderSide(color: Color(0x409E9E9E), width: 0.0),
+              borderRadius: BorderRadius.circular(5.0),
+            ),
+            filled: true,
+            fillColor: const Color(0x409E9E9E),
+          ),
+        ),
+      );
+
+  Widget _Delete() => Container(
+        margin: const EdgeInsets.only(top: 15),
+        child: TextButton(
+          onPressed: () {
+            //Todo: Add Real JWT from localstorage
+            deleteUser("b134c06e-d554-489a-b77d-30430457e44b");
+          },
+          style: TextButton.styleFrom(
+            primary: Colors.red,
+          ),
+          child: const Text(
+            "Delete my account",
+            style: TextStyle(fontSize: 16),
+          ),
+        ),
+      );
+
+  Widget _ComingSoon() => Container(
+        margin: const EdgeInsets.only(top: 65),
+        child: const Text(
+          "COMING SOON",
+          style: TextStyle(
+            fontSize: 24,
+            color: Color(0xFFCED5E3),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      );
 }
