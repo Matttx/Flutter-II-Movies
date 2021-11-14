@@ -48,7 +48,7 @@ void main() {
       when(client
           .post(Uri.parse('${Constants.API_URL}:8080/login'), body: {'email': "Thomas@email.fr", 'password': "toto"}))
           .thenAnswer((_) async =>
-          http.Response('{"message": "Account successfully created", "result": "ad0dea00-7b40-4fcc-98ea-8afe6428f265"}', 200));
+          http.Response('{"message": "Successfully logged in", "result": "ad0dea00-7b40-4fcc-98ea-8afe6428f265"}', 200));
 
       expect(await login(client, "Thomas@email.fr", "toto"), isA<Token>());
     });
