@@ -2,63 +2,103 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:movies/src/package/card.dart';
 import 'package:movies/src/theme/app_colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final userBloc = UserBloc(jwt'');
+
+  Future<void> getSharedPrefs() async {
+    SharedPreferences s = await SharedPreferences.getInstance();
+    String? jwt = s.getString("jwt");
+    if (jwt != null) {
+      userBloc.jwt = jwt;
+    }
+  }
+
+  @override
+  void initState() {
+    getSharedPrefs();
+    userBloc.userEventSink.add(UserAction.Fetch);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: ListView(
-            children: [
-              _buildHeader(),
-              _buildSectionHeader("Covid Pass"),
-              const SpecialCard(
-                  title: 'Scan your certificate',
-                  subtitle: 'If you got vaccinated, you should have a QR code',
-                  image: 'assets/images/qrcode.png',
-                  backgroundColor: Colors.indigo,
+        child: StreamBuilder<User>(
+          stream: userBloc.user,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: ListView(
+                  children: [
+                    _buildHeader(snapshot),
+                    _buildSectionHeader("Covid Pass"),
+                    const SpecialCard(
+                      title: 'Scan your certificate',
+                      subtitle: 'If you got vaccinated, you should have a QR code',
+                      image: 'assets/images/qrcode.png',
+                      backgroundColor: Colors.indigo,
+                    ),
+                    _buildSectionHeader("Reminders"),
+                    const SpecialCard(
+                      title: 'Wash your hands',
+                      subtitle: 'Don’t forget to wash your hands, it’s a quick move protecting you and others',
+                      image: 'assets/images/washing.png',
+                      backgroundColor: AppColors.primary,
+                    ),
+                    const SpecialCard(
+                      title: 'Have symptoms?',
+                      subtitle: 'Keep your calm, isolate yourself from others and rest as much as possible',
+                      image: 'assets/images/coughing.png',
+                      imagePosition: ImagePos.bottomLeft,
+                      backgroundColor: Colors.lightGreen,
+                    ),
+                    const SpecialCard(
+                      title: 'Still not vaccinated?',
+                      subtitle: 'Take a look at our website and take an appointment',
+                      image: 'assets/images/innovation.png',
+                      backgroundColor: AppColors.redDark,
+                    ),
+                  ],
                 ),
-              _buildSectionHeader("Reminders"),
-              const SpecialCard(
-                title: 'Wash your hands',
-                subtitle: 'Don’t forget to wash your hands, it’s a quick move protecting you and others',
-                image: 'assets/images/washing.png',
-                backgroundColor: AppColors.primary,
-              ),
-              const SpecialCard(
-                title: 'Have symptoms?',
-                subtitle: 'Keep your calm, isolate yourself from others and rest as much as possible',
-                image: 'assets/images/coughing.png',
-                imagePosition: ImagePos.bottomLeft,
-                backgroundColor: Colors.lightGreen,
-              ),
-              const SpecialCard(
-                title: 'Still not vaccinated?',
-                subtitle: 'Take a look at our website and take an appointment',
-                image: 'assets/images/innovation.png',
-                backgroundColor: AppColors.redDark,
-              ),
-            ],
-          ),
+              );
+            }
+            if (snapshot.hasError) {
+              return Center(
+                  child: Text(snapshot.error.toString())
+              );
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
+          },
         ),
       ),
     );
   }
 
-  Widget _buildHeader() => Padding(
+  Widget _buildHeader(snapshot) =>
+      Padding(
         padding: const EdgeInsets.only(top: 10.0),
         child: Row(
           children: [
-            const Padding(
-              padding: EdgeInsets.only(right: 15.0),
+            Padding(
+              padding: const EdgeInsets.only(right: 15.0),
               child: CircleAvatar(
                 child: Text(
-                  "U",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  snapshot.data!.username.isNotEmpty
+                      ? snapshot.data!.username[0].toUpperCase()
+                      : "?",
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
@@ -68,9 +108,11 @@ class HomeScreen extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Hello, Username",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                Text(
+                  'Hello, ${snapshot.data!.username.isNotEmpty
+                      ? snapshot.data!.username
+                      : "?"}',
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   DateFormat('E dd MMM. yyyy').format(DateTime.now()),
@@ -83,7 +125,8 @@ class HomeScreen extends StatelessWidget {
         ),
       );
 
-  Widget _buildSectionHeader(String title) => Padding(
+  Widget _buildSectionHeader(String title) =>
+      Padding(
         padding: const EdgeInsets.only(bottom: 10.0, top: 20),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
