@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:movies/src/models/user.dart';
+import 'package:movies/src/pages/login_screen.dart';
 import 'package:movies/src/widgets/profile_information.dart';
 import 'package:movies/src/controllers/user_controller.dart';
 import 'package:movies/blocs/user/user_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -14,11 +16,35 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePage extends State<ProfilePage> {
   // Todo: Add real JWT from local storage
-  final userBloc = UserBloc(jwt: "731b1b6a-7900-4215-8e86-ec3203b72ce4");
+
+  final userBloc = UserBloc(jwt: "");
   final TextEditingController _controller = TextEditingController();
+
+  Future<void> getSharedPrefs() async {
+    SharedPreferences s = await SharedPreferences.getInstance();
+    String? jwt = s.getString("jwt");
+    if (jwt != null) {
+      userBloc.jwt = jwt;
+    }
+  }
+
+  Future<void> deleteAccount() async {
+    deleteUser(userBloc.jwt);
+    SharedPreferences s = await SharedPreferences.getInstance();
+    s.remove("jwt");
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return const LoginScreen();
+        },
+      ),
+    );
+  }
 
   @override
   void initState() {
+    getSharedPrefs();
     userBloc.userEventSink.add(UserAction.Fetch);
     _controller.addListener(() {
       final String text = _controller.text.toLowerCase();
@@ -185,8 +211,7 @@ class _ProfilePage extends State<ProfilePage> {
           cursorColor: Theme.of(context).primaryColor,
           controller: _controller,
           onFieldSubmitted: (value) {
-            //Todo: Add Real JWT from localstorage
-            updateUser("731b1b6a-7900-4215-8e86-ec3203b72ce4", value);
+            updateUser(userBloc.jwt, value);
           },
           decoration: InputDecoration(
             focusedBorder: InputBorder.none,
@@ -205,8 +230,7 @@ class _ProfilePage extends State<ProfilePage> {
         margin: const EdgeInsets.only(top: 15),
         child: TextButton(
           onPressed: () {
-            //Todo: Add Real JWT from localstorage
-            deleteUser("b134c06e-d554-489a-b77d-30430457e44b");
+            deleteAccount();
           },
           style: TextButton.styleFrom(
             primary: Colors.red,

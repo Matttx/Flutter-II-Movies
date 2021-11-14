@@ -1,5 +1,5 @@
 // URL for the API
-const String API_URL = "http:/localhost";
+const String API_URL = "http://localhost";
 const String API_URL_NO_HTTP = "localhost";
 
 // Error messages
