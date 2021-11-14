@@ -40,6 +40,7 @@ class AppTheme {
       primaryColorDark: AppColors.primaryDark,
       primaryColorLight: AppColors.primaryLight,
       primaryColorBrightness: Brightness.dark,
+      errorColor: AppColors.red,
 
       buttonTheme: base.buttonTheme.copyWith(
         buttonColor: AppColors.primary,
