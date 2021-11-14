@@ -27,7 +27,7 @@ Future<User> getMe(String jwt) async {
     if (error.message != null) {
       throw Exception(error.message);
     } else {
-      throw Exception(Constants.DEFAULT_REGISTER_ERROR);
+      throw Exception(Constants.DEFAULT_GET_USER_ERROR);
     }
   }
 }
@@ -54,7 +54,7 @@ Future<void> deleteUser(String jwt) async {
     if (error.message != null) {
       throw Exception(error.message);
     } else {
-      throw Exception(Constants.DEFAULT_REGISTER_ERROR);
+      throw Exception(Constants.DEFAULT_PUT_USER_ERROR);
     }
   }
 }
@@ -85,7 +85,7 @@ Future<void> updateUser(String jwt, String email) async {
     if (error.message != null) {
       throw Exception(error.message);
     } else {
-      throw Exception(Constants.DEFAULT_REGISTER_ERROR);
+      throw Exception(Constants.DEFAULT_PUT_USER_ERROR);
     }
   }
 }
