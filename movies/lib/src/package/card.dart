@@ -15,7 +15,6 @@ enum ImagePos {
 }
 
 extension ImagePosition on ImagePos {
-
   AlignmentGeometry get position {
     switch (this) {
       case ImagePos.right:
@@ -34,11 +33,11 @@ extension ImagePosition on ImagePos {
         return Alignment.center;
     }
   }
-
 }
 
 class SpecialCard extends StatelessWidget {
-  const SpecialCard({Key? key,
+  const SpecialCard({
+    Key? key,
     required this.title,
     required this.subtitle,
     required this.image,
@@ -61,10 +60,9 @@ class SpecialCard extends StatelessWidget {
   final double? radius;
 
   bool isImageLeft() {
-    if (imagePosition == ImagePos.left
-    || imagePosition == ImagePos.topLeft
-    || imagePosition == ImagePos.bottomLeft
-    ) {
+    if (imagePosition == ImagePos.left ||
+        imagePosition == ImagePos.topLeft ||
+        imagePosition == ImagePos.bottomLeft) {
       return true;
     }
     return false;
@@ -77,70 +75,97 @@ class SpecialCard extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         padding: padding,
         decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: BorderRadius.circular(radius!)
-        ),
+            color: backgroundColor,
+            borderRadius: BorderRadius.circular(radius!)),
         child: IntrinsicHeight(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              isImageLeft() ? SizedBox(
-                child: Align(
-                  alignment: imagePosition!.position,
-                  //heightFactor: 1,
-                  //widthFactor: 1,
-                  child: Image.asset(
-                    image,
-                    height: 100,
-                    width: 100,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ) : const SizedBox.shrink(),
+              isImageLeft()
+                  ? SizedBox(
+                      child: Align(
+                          alignment: imagePosition!.position,
+                          //heightFactor: 1,
+                          //widthFactor: 1,
+                          child: Image.asset(
+                            image,
+                            height: 100,
+                            width: 100,
+                            fit: BoxFit.cover,
+                            errorBuilder: (BuildContext context,
+                                Object exception, StackTrace? stackTrace) {
+                              return Column(children: [
+                                Image.asset(
+                                  'assets/error.png',
+                                  height: 100,
+                                  width: 100,
+                                  fit: BoxFit.cover,
+                                ),
+                                const Text('Image not found',
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                      fontSize: 10,
+                                    ))
+                              ]);
+                            },
+                          )),
+                    )
+                  : const SizedBox.shrink(),
               Flexible(
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      title,
-                      style: TextStyle(
-                        color: fontColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      )
-                    ),
-                    Flexible(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Text(
-                          subtitle,
-                          overflow: TextOverflow.fade,
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(title,
                           style: TextStyle(
                             color: fontColor,
-                            fontSize: 15,
-                          )
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          )),
+                      Flexible(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Text(subtitle,
+                              overflow: TextOverflow.fade,
+                              style: TextStyle(
+                                color: fontColor,
+                                fontSize: 15,
+                              )),
                         ),
                       ),
-                    ),
-                  ]
-                ),
+                    ]),
               ),
-              isImageLeft() ? const SizedBox.shrink()
+              isImageLeft()
+                  ? const SizedBox.shrink()
                   : SizedBox(
-                child: Align(
-                  alignment: imagePosition!.position,
-                  heightFactor: 1,
-                  widthFactor: 1,
-                  child: Image.asset(
-                    image,
-                    height: 100,
-                    width: 100,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
+                      child: Align(
+                          alignment: imagePosition!.position,
+                          heightFactor: 1,
+                          widthFactor: 1,
+                          child: Image.asset(
+                            image,
+                            height: 100,
+                            width: 100,
+                            fit: BoxFit.cover,
+                            errorBuilder: (BuildContext context,
+                                Object exception, StackTrace? stackTrace) {
+                              return Column(children: [
+                                Image.asset(
+                                  'assets/error.png',
+                                  height: 100,
+                                  width: 100,
+                                  fit: BoxFit.cover,
+                                ),
+                                const Text('Image not found',
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                      fontSize: 10,
+                                    ))
+                              ]);
+                            },
+                          )),
+                    ),
             ],
           ),
         ),
