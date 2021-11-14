@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Movies',
       theme: AppTheme.defaultTheme,
-      home: isLoggedIn ? const NavigationScreen() :const LoginScreen(),
+      home: isLoggedIn ? const NavigationScreen() : const LoginScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

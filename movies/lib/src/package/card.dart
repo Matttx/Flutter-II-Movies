@@ -88,13 +88,14 @@ class SpecialCard extends StatelessWidget {
               isImageLeft() ? SizedBox(
                 child: Align(
                   alignment: imagePosition!.position,
-                  //heightFactor: 1,
-                  //widthFactor: 1,
-                  child: Image.asset(
-                    image,
-                    height: 100,
-                    width: 100,
-                    fit: BoxFit.cover,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Image.asset(
+                      image,
+                      height: 100,
+                      width: 100,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ) : const SizedBox.shrink(),
@@ -133,11 +134,14 @@ class SpecialCard extends StatelessWidget {
                   alignment: imagePosition!.position,
                   heightFactor: 1,
                   widthFactor: 1,
-                  child: Image.asset(
-                    image,
-                    height: 100,
-                    width: 100,
-                    fit: BoxFit.cover,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10.0),
+                    child: Image.asset(
+                      image,
+                      height: 100,
+                      width: 100,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
