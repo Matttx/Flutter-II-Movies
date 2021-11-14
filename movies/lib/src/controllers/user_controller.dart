@@ -54,7 +54,7 @@ Future<void> deleteUser(String jwt) async {
     if (error.message != null) {
       throw Exception(error.message);
     } else {
-      throw Exception(Constants.DEFAULT_PUT_USER_ERROR);
+      throw Exception(Constants.DEFAULT_DELETE_USER_ERROR);
     }
   }
 }
