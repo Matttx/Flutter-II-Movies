@@ -41,7 +41,7 @@ You should be able to see the `API_URL` on the second line. Please replace the c
 If you don't know how to find your IpV4 address:
 - **On MacOS** here is a [quick help](https://www.hellotech.com/guide/for/how-to-find-ip-address-on-mac).
 - **On Windows** here is a [tuto](https://support.microsoft.com/en-us/windows/find-your-ip-address-in-windows-f21a9bbc-c582-55cd-35e0-73431160a1b9)
-- **On Linux** get in the wi-fi settings, click on your current wi-fi settings and check the address next to the IPv4 field.
+- **On Linux** get in the wi-fi settings, click on your current wi-fi settings and check the address next to the IPv4 field or run the command ```ip addr show | grep "inet 192"``` and it is the value going from `192` to the `/`.
 
 ## API
 
