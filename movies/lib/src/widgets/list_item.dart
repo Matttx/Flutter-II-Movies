@@ -24,6 +24,7 @@ class ListItem extends StatelessWidget {
     return GestureDetector(
       onTap: showSheet,
       child: Container(
+        key: const Key("ListItem"),
         margin: const EdgeInsets.symmetric(vertical: 10),
         height: 100,
         decoration: BoxDecoration(
@@ -40,6 +41,7 @@ class ListItem extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
+            key: const Key("ListInfos"),
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -53,8 +55,12 @@ class ListItem extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _buildValue(context, value: country.newConfirmed, description: "New confirmed", important: true),
-                  _buildValue(context, value: country.newDeaths, description: "New deaths"),
+                  _buildValue(context,
+                      value: country.newConfirmed,
+                      description: "New confirmed",
+                      important: true),
+                  _buildValue(context,
+                      value: country.newDeaths, description: "New deaths"),
                 ],
               )
             ],
@@ -66,6 +72,7 @@ class ListItem extends StatelessWidget {
 
   Widget buildSheet(context, state) => Material(
           child: Container(
+        key: const Key("SheetItem"),
         width: MediaQuery.of(context).size.width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,19 +82,20 @@ class ListItem extends StatelessWidget {
               child: Center(
                 child: Text(
                   country.name,
-                  style:
-                      const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 22, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
-            const SectionHeader(children: [
+            const SectionHeader(key: Key("SheetCountryInfosHeader"), children: [
               Text(
                 "COUNTRY INFORMATIONS",
                 style: TextStyle(color: Colors.grey),
               ),
             ]),
             Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
+              padding:
+                  const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -95,7 +103,7 @@ class ListItem extends StatelessWidget {
                 ],
               ),
             ),
-            SectionHeader(children: [
+            SectionHeader(key: const Key("SheetCovidInfosHeader"), children: [
               const Text(
                 "COVID INFORMATIONS",
                 style: TextStyle(color: Colors.grey),
@@ -111,33 +119,34 @@ class ListItem extends StatelessWidget {
       ));
 
   Widget _buildCovidInformations() => Padding(
-    padding: const EdgeInsets.only(bottom: 100.0, right: 20, left: 20),
-    child: Wrap(
-      direction: Axis.horizontal,
-      spacing: 10,
-      runSpacing: 20,
-      children: [
-        FloatingCard(
-          value: country.newConfirmed,
-          description: 'New confirmed',
-          important: true,
+        key: const Key("CovidInfos"),
+        padding: const EdgeInsets.only(bottom: 100.0, right: 20, left: 20),
+        child: Wrap(
+          direction: Axis.horizontal,
+          spacing: 10,
+          runSpacing: 20,
+          children: [
+            FloatingCard(
+              value: country.newConfirmed,
+              description: 'New confirmed',
+              important: true,
+            ),
+            FloatingCard(
+              value: country.newDeaths,
+              description: 'New deaths',
+            ),
+            FloatingCard(
+              value: country.totalConfirmed,
+              description: 'Total confirmed',
+              important: true,
+            ),
+            FloatingCard(
+              value: country.totalDeaths,
+              description: 'Total deaths',
+            ),
+          ],
         ),
-        FloatingCard(
-          value: country.newDeaths,
-          description: 'New deaths',
-        ),
-        FloatingCard(
-          value: country.totalConfirmed,
-          description: 'Total confirmed',
-          important: true,
-        ),
-        FloatingCard(
-          value: country.totalDeaths,
-          description: 'Total deaths',
-        ),
-      ],
-    ),
-  );
+      );
 
   Widget buildHeaderSheet(context, state) => Material(
           child: Column(
@@ -159,7 +168,8 @@ class ListItem extends StatelessWidget {
         ],
       ));
 
-  Widget _buildValue(context, {value, description, important = false}) => Column(
+  Widget _buildValue(context, {value, description, important = false}) =>
+      Column(
         children: [
           Text(
             value.toString(),

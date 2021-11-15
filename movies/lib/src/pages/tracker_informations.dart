@@ -37,14 +37,18 @@ class _TrackerPageState extends State<TrackerPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildTitle(context),
-        const SectionHeader(children: [
+        const SectionHeader(
+          key: Key("GlobalHeader"),
+          children: [
           Text(
             "GLOBAL INFORMATIONS",
             style: TextStyle(color: Colors.grey),
           ),
         ]),
         _buildGlobalInformations(),
-        SectionHeader(children: [
+        SectionHeader(
+          key: const Key("CountriesHeader"),
+          children: [
           const Text(
             "COUNTRIES INFORMATIONS",
             style: TextStyle(color: Colors.grey),
@@ -65,6 +69,7 @@ class _TrackerPageState extends State<TrackerPage> {
   Widget _buildTitle(context) => Padding(
         padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
         child: RichText(
+          key: const Key("Title"),
           text: TextSpan(
               style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
               children: [
@@ -76,6 +81,7 @@ class _TrackerPageState extends State<TrackerPage> {
       );
 
   Widget _buildGlobalInformations() => Padding(
+        key: const Key("GlobalInformations"),
         padding: const EdgeInsets.only(bottom: 20.0, right: 20, left: 20),
         child: Wrap(
           direction: Axis.horizontal,
@@ -109,9 +115,10 @@ class _TrackerPageState extends State<TrackerPage> {
     sortedCountries.sort((a, b) => b.newConfirmed.compareTo(a.newConfirmed));
     return Expanded(
       child: ListView.builder(
+          key: const Key("CountriesList"),
           physics: const NeverScrollableScrollPhysics(),
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          itemCount: 3,
+          itemCount: sortedCountries.length > 3 ? 3 : sortedCountries.length,
           itemBuilder: (context, index) {
             return ListItem(country: sortedCountries[index]);
           }),

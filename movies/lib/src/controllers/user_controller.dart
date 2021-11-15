@@ -6,15 +6,12 @@ import 'package:movies/src/models/error.dart';
 import 'package:movies/config/constants.dart' as Constants;
 import 'package:movies/src/models/user.dart';
 
-Future<User> getMe(String jwt) async {
+Future<User> getMe(http.Client client, String jwt) async {
   final queryParameters = {'jwt': jwt};
+  String queryString = Uri(queryParameters: queryParameters).query;
 
-  final uri =
-      Uri.http('${Constants.API_URL_NO_HTTP}:8080', '/me', queryParameters);
-  var response = await http
-      .get(
-    uri,
-  )
+  var response = await client
+      .get(Uri.parse('${Constants.API_URL}:8080/me?$queryString'))
       .catchError((e) {
     throw Exception(Constants.SERVER_ERROR);
   });
@@ -32,23 +29,19 @@ Future<User> getMe(String jwt) async {
   }
 }
 
-Future<void> deleteUser(String jwt) async {
+Future<bool> deleteUser(http.Client client, String jwt) async {
   final queryParameters = {'jwt': jwt};
+  String queryString = Uri(queryParameters: queryParameters).query;
 
-  final uri = Uri.http(
-      '${Constants.API_URL_NO_HTTP}:8080', '/user/delete', queryParameters);
-  var response = await http
-      .delete(
-    uri,
-  )
+  var response = await client
+      .delete(Uri.parse('${Constants.API_URL}:8080/user/delete?$queryString'))
       .catchError((e) {
     throw Exception(Constants.SERVER_ERROR);
   });
 
   if (response.statusCode == 200) {
-    return;
+    return true;
   } else {
-    var tmp = jsonDecode(response.body);
     var error = APIError.fromJson(jsonDecode(response.body));
 
     if (error.message != null) {
@@ -59,13 +52,12 @@ Future<void> deleteUser(String jwt) async {
   }
 }
 
-Future<void> updateUser(String jwt, String email) async {
+Future<bool> updateUser(http.Client client, String jwt, String email) async {
   final queryParameters = {'jwt': jwt};
+  String queryString = Uri(queryParameters: queryParameters).query;
 
-  final uri = Uri.http(
-      '${Constants.API_URL_NO_HTTP}:8080', '/user/update', queryParameters);
-  var response = await http.put(
-    uri,
+  var response = await client.put(
+    Uri.parse('${Constants.API_URL}:8080/user/update?$queryString'),
     body: jsonEncode({
       'fields': {'email': email},
     }),
@@ -77,7 +69,7 @@ Future<void> updateUser(String jwt, String email) async {
   });
 
   if (response.statusCode == 200) {
-    return;
+    return true;
   } else {
     var tmp = jsonDecode(response.body);
     var error = APIError.fromJson(jsonDecode(response.body));

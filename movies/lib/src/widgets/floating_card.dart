@@ -11,7 +11,6 @@ class FloatingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         width: MediaQuery.of(context).size.width / 2.3,
-        height: MediaQuery.of(context).size.height / 13,
         decoration: BoxDecoration(
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(10),

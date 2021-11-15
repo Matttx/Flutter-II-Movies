@@ -53,24 +53,33 @@ class _HomeScreenState extends State<HomeScreen> {
                       backgroundColor: Colors.indigo,
                     ),
                     _buildSectionHeader("Reminders"),
-                    const SpecialCard(
-                      title: 'Wash your hands',
-                      subtitle: 'Don’t forget to wash your hands, it’s a quick move protecting you and others',
-                      image: 'assets/images/washing.png',
-                      backgroundColor: AppColors.primary,
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      child: SpecialCard(
+                        title: 'Wash your hands',
+                        subtitle: 'Don’t forget to wash your hands, it’s a quick move protecting you and others',
+                        image: 'assets/images/washing.png',
+                        backgroundColor: AppColors.primary,
+                      ),
                     ),
-                    const SpecialCard(
-                      title: 'Have symptoms?',
-                      subtitle: 'Keep your calm, isolate yourself from others and rest as much as possible',
-                      image: 'assets/images/coughing.png',
-                      imagePosition: ImagePos.bottomLeft,
-                      backgroundColor: Colors.lightGreen,
+                     const Padding(
+                       padding: EdgeInsets.symmetric(vertical: 10),
+                       child: SpecialCard(
+                        title: 'Have symptoms?',
+                        subtitle: 'Keep your calm, isolate yourself from others and rest as much as possible',
+                        image: 'assets/images/coughing.png',
+                        imagePosition: ImagePos.bottomLeft,
+                        backgroundColor: Colors.lightGreen,
                     ),
-                    const SpecialCard(
-                      title: 'Still not vaccinated?',
-                      subtitle: 'Take a look at our website and take an appointment',
-                      image: 'assets/images/innovation.png',
-                      backgroundColor: AppColors.redDark,
+                     ),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      child: SpecialCard(
+                        title: 'Still not vaccinated?',
+                        subtitle: 'Take a look at our website and take an appointment',
+                        image: 'assets/images/innovation.png',
+                        backgroundColor: AppColors.redDark,
+                      ),
                     ),
                   ],
                 ),
