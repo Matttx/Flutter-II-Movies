@@ -1,37 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:movies/src/pages/login_screen.dart';
+import 'package:movies/src/pages/navigation_screen.dart';
+import 'package:movies/src/theme/app_colors.dart';
+import 'package:movies/src/theme/app_theme.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key, required this.isLoggedIn}) : super(key: key);
+
+  final bool isLoggedIn;
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: AppColors.background,
+        statusBarBrightness: Brightness.dark
+    ));
+
     return MaterialApp(
       title: 'Movies',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const HomePage(),
+      theme: AppTheme.defaultTheme,
+      home: isLoggedIn ? const NavigationScreen() : const LoginScreen(),
       debugShowCheckedModeBanner: false,
-    );
-  }
-}
-
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Container(
-          child: const Text("Main"),
-        ),
-      ),
     );
   }
 }
