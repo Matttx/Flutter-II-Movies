@@ -49,6 +49,7 @@ class _CountriesListState extends State<CountriesList> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
+          key: const Key("CountriesFullListScrollView"),
           child: Column(
             children: [
               Container(
@@ -62,6 +63,7 @@ class _CountriesListState extends State<CountriesList> {
                 child: Padding(
                   padding: const EdgeInsets.only(right: 20.0),
                   child: TextField(
+                    key: const Key("CountriesSearchField"),
                     onChanged: (String value) {
                       filterCountries(value);
                     },
@@ -78,6 +80,7 @@ class _CountriesListState extends State<CountriesList> {
                 ),
               ),
               ListView.builder(
+                  key: const Key("CountriesFullList"),
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   padding: const EdgeInsets.symmetric(horizontal: 20),
