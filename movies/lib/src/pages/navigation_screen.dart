@@ -29,14 +29,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
 
   Widget getBody() {
     List<Widget> pages = [
-      Container(
-        alignment: Alignment.center,
-        child: const HomeScreen(),
-      ),
-      Container(
-        alignment: Alignment.center,
-        child: const TrackerScreen(),
-      ),
+      const HomeScreen(),
+      const TrackerScreen(),
       Container(
         alignment: Alignment.center,
         child: Text(
@@ -44,10 +38,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
         ),
       ),
-      Container(
-        alignment: Alignment.center,
-        child: const ProfilePage(),
-      ),
+      const ProfilePage(),
     ];
     return IndexedStack(
       index: _currentIndex,
