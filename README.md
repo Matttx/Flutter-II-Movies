@@ -32,7 +32,7 @@ If you some help, use following links:
 Once the project is ready to go, you can click on the Run command in your IDE or run the command `flutter run`.
 
 #### iOS
-Nothing to mentionned.
+If it happens that the server cannot be reached with the default configuration, follow the Android set up down below.
 
 #### Android
 To run the project on Android, it is a **MUST** to change the URL endpoint value, because otherwise, it will not consider the server endpoint even if it is running.
