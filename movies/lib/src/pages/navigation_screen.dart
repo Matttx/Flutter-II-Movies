@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:movies/src/pages/home_screen.dart';
 import 'package:movies/src/pages/profile_page.dart';
 import 'package:movies/src/pages/tracker_screen.dart';
 import 'package:movies/src/theme/app_colors.dart';
@@ -28,10 +29,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
 
   Widget getBody() {
     List<Widget> pages = [
-      Container(
-        alignment: Alignment.center,
-        child: TrackerScreen(),
-      ),
+      const HomeScreen(),
+      const TrackerScreen(),
       Container(
         alignment: Alignment.center,
         child: Text(
@@ -39,14 +38,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
         ),
       ),
-      Container(
-        alignment: Alignment.center,
-        child: Text(
-          "Emergency",
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-        ),
-      ),
-      ProfilePage(),
+      const ProfilePage(),
     ];
     return IndexedStack(
       index: _currentIndex,
