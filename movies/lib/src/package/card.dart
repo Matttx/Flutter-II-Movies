@@ -1,9 +1,6 @@
-import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:movies/src/theme/app_colors.dart';
 
 enum ImagePos {
   right,
@@ -44,7 +41,6 @@ class SpecialCard extends StatelessWidget {
     required this.backgroundColor,
     this.fontColor = Colors.white,
     this.imagePosition = ImagePos.right,
-    this.onTap,
     this.padding = const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
     this.radius = 5.0,
   }) : super(key: key);
@@ -55,7 +51,6 @@ class SpecialCard extends StatelessWidget {
   final Color backgroundColor;
   final Color? fontColor;
   final ImagePos? imagePosition;
-  final VoidCallback? onTap;
   final EdgeInsets? padding;
   final double? radius;
 
@@ -86,8 +81,6 @@ class SpecialCard extends StatelessWidget {
                   ? SizedBox(
                       child: Align(
                           alignment: imagePosition!.position,
-                          //heightFactor: 1,
-                          //widthFactor: 1,
                           child: Image.asset(
                             image,
                             height: 100,
