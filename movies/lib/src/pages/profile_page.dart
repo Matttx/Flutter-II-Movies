@@ -32,7 +32,7 @@ class _ProfilePage extends State<ProfilePage> {
   Future<void> deleteAccount() async {
     deleteUser(http.Client(), userBloc.jwt);
     SharedPreferences s = await SharedPreferences.getInstance();
-    s.remove("jwt");
+    await s.setString("jwt", "");
     Navigator.push(
       context,
       MaterialPageRoute(

@@ -81,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
         SharedPreferences s = await SharedPreferences.getInstance();
 
         print(token.jwt);
-        s.setString("jwt", token.jwt);
+        await s.setString("jwt", token.jwt);
 
         setState(() {
           _isLoading = false;

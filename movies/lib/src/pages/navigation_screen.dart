@@ -33,8 +33,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
       const TrackerScreen(),
       Container(
         alignment: Alignment.center,
-        child: Text(
-          "Tracker",
+        child: const Text(
+          "Emergency",
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
         ),
       ),
