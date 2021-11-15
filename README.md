@@ -39,8 +39,8 @@ To run the project on Android, it is a **MUST** to change the URL endpoint value
 To do this, please open the file to next path from the repository root: `movies/lib/config/constants.dart`.
 You should be able to see the `API_URL` on the second line. Please replace the current value by `http://<YOUR_IPV4_ADDRESS>`, and replace the tag `YOUR_IPV4_ADDRESS` by your current IPv4 address.
 If you don't know how to find your IpV4 address:
-- **On MacOS** it's the IP Address of your current connection. Go into the options of your connection and you should be able to see it.
-- **On Windows** here a [tuto](https://support.microsoft.com/en-us/windows/find-your-ip-address-in-windows-f21a9bbc-c582-55cd-35e0-73431160a1b9)
+- **On MacOS** here is a [quick help](https://www.hellotech.com/guide/for/how-to-find-ip-address-on-mac).
+- **On Windows** here is a [tuto](https://support.microsoft.com/en-us/windows/find-your-ip-address-in-windows-f21a9bbc-c582-55cd-35e0-73431160a1b9)
 - **On Linux** get in the wi-fi settings, click on your current wi-fi settings and check the address next to the IPv4 field.
 
 ## API
