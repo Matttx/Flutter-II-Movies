@@ -44,6 +44,7 @@ dependencies:
   shared_preferences: ^2.0.8
   mockito: ^5.0.16
   build_runner: ^2.1.5
+  http_mock_adapter: ^0.3.2
 
 dev_dependencies:
   flutter_test:
