@@ -3,8 +3,10 @@ import 'package:movies/models/covid_model.dart';
 import 'package:movies/config/constants.dart' as Constants;
 
 class ApiProvider {
-  final Dio _dio = Dio();
+  final Dio _dio;
   final String _url = '${Constants.API_URL}:8080/';
+
+  ApiProvider(this._dio);
 
   Future<CovidModel> fetchCovidList() async {
     try {
