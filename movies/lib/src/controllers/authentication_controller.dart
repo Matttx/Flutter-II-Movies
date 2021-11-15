@@ -6,14 +6,11 @@ import 'package:movies/src/models/error.dart';
 import 'package:movies/src/models/token.dart';
 import 'package:movies/config/constants.dart' as Constants;
 
-Future<Token> register(http.Client client, String username, String email, String password) async {
+Future<Token> register(
+    http.Client client, String username, String email, String password) async {
   var response = await client.post(
     Uri.parse('${Constants.API_URL}:8080/register'),
-    body: {
-      'email': email,
-      'password': password,
-      'username': username
-    },
+    body: {'email': email, 'password': password, 'username': username},
   ).catchError((e) {
     throw Exception(Constants.SERVER_ERROR);
   });
@@ -34,10 +31,7 @@ Future<Token> register(http.Client client, String username, String email, String
 Future<Token> login(http.Client client, String email, String password) async {
   var response = await client.post(
     Uri.parse('${Constants.API_URL}:8080/login'),
-    body: {
-      'email': email,
-      'password': password
-    },
+    body: {'email': email, 'password': password},
   ).catchError((e) {
     throw Exception(Constants.SERVER_ERROR);
   });

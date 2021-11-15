@@ -5,9 +5,7 @@ class APIError {
 
   factory APIError.fromJson(Map<String, dynamic> json) {
     try {
-      return APIError(
-          message: json['message']
-      );
+      return APIError(message: json['message']);
     } catch (e) {
       return APIError(message: null);
     }

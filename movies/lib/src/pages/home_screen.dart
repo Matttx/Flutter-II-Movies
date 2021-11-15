@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:movies/blocs/user/user_bloc.dart';
+import 'package:movies/src/models/user.dart';
 import 'package:movies/src/package/card.dart';
+import 'package:movies/src/pages/profile_page.dart';
 import 'package:movies/src/theme/app_colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final userBloc = UserBloc(jwt'');
+  final userBloc = UserBloc(jwt: '');
 
   Future<void> getSharedPrefs() async {
     SharedPreferences s = await SharedPreferences.getInstance();
