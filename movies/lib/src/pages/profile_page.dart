@@ -6,6 +6,7 @@ import 'package:movies/src/widgets/profile_information.dart';
 import 'package:movies/src/controllers/user_controller.dart';
 import 'package:movies/blocs/user/user_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -29,7 +30,7 @@ class _ProfilePage extends State<ProfilePage> {
   }
 
   Future<void> deleteAccount() async {
-    deleteUser(userBloc.jwt);
+    deleteUser(http.Client(), userBloc.jwt);
     SharedPreferences s = await SharedPreferences.getInstance();
     s.remove("jwt");
     Navigator.push(
@@ -211,7 +212,7 @@ class _ProfilePage extends State<ProfilePage> {
           cursorColor: Theme.of(context).primaryColor,
           controller: _controller,
           onFieldSubmitted: (value) {
-            updateUser(userBloc.jwt, value);
+            updateUser(http.Client(), userBloc.jwt, value);
           },
           decoration: InputDecoration(
             focusedBorder: InputBorder.none,
