@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:movies/models/covid_model.dart';
 import 'package:movies/src/widgets/section_header.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
@@ -109,7 +110,7 @@ class ListItem extends StatelessWidget {
                 style: TextStyle(color: Colors.grey),
               ),
               Text(
-                country.date.toString(),
+                DateFormat('E dd MMM. yyyy').format(DateTime.fromMillisecondsSinceEpoch(country.date * 1000)),
                 style: const TextStyle(color: Colors.grey),
               ),
             ]),

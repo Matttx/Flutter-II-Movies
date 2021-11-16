@@ -31,13 +31,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
     List<Widget> pages = [
       const HomeScreen(),
       const TrackerScreen(),
-      Container(
-        alignment: Alignment.center,
-        child: const Text(
-          "Emergency",
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-        ),
-      ),
       const ProfilePage(),
     ];
     return IndexedStack(
@@ -64,15 +57,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
           BottomNavyBarItem(
             icon: const Icon(Icons.compare_arrows),
             title: const Text('Tracker'),
-            activeColor: _accentColor,
-            inactiveColor: _inactiveColor,
-            textAlign: TextAlign.center,
-          ),
-          BottomNavyBarItem(
-            icon: const Icon(Icons.call),
-            title: const Text(
-              'Emergency ',
-            ),
             activeColor: _accentColor,
             inactiveColor: _inactiveColor,
             textAlign: TextAlign.center,
