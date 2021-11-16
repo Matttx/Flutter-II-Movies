@@ -4,6 +4,8 @@ Flutter App with BLoC pattern
 This application is a little Covid Tracker (even if it's called Movies).
 This little document is made of two main parts, one for the project set up and the other for the API.
 
+**PLEASE FOLLOW EVERY STEP IN THE SET UP PART TO LAUNCH THE SERVER AND THE APPLICATION**
+
 ## Project Set Up
 
 ### The server
