@@ -22,7 +22,7 @@ If you're facing any kind of issues, it should mostly refer to your `node` versi
 You can switch node version with [nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
 ### The mobile application
-For both of the platforms, please be sure to run the project with at least the flutter **2.5.1** version and the dart **2.14.2** version.
+For both of the platforms, please be sure to run the project with at least the flutter **2.5.3** version and the dart **2.14.2** version.
 
 If you some help, use following links:
 - [Android Studio Installation](https://developer.android.com/studio/install)
