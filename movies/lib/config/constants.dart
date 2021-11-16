@@ -1,5 +1,5 @@
 // URL for the API
-const String API_URL = "http://192.168.0.14";
+const String API_URL = "http://localhost";
 
 // Error messages
 const String SERVER_ERROR =
